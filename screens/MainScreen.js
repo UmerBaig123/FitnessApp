@@ -50,7 +50,13 @@ const MainScreen=({navigation})=>{
           <AppSingleDropdown
           placeholder="Select your daily activity"
           options={[
-            { value: "1", label: "Very Low Activity"},
+            { value: "1", label: (
+             <Text
+             style={{
+              color:"",
+             }}
+             >Very Low Activity</Text> 
+            )},
             { value: "2", label: "Low Activity" },
             { value: "3", label: "Moderate Activity" },
             { value: "4", label: "High Activity" },
