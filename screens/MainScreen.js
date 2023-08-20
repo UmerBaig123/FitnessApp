@@ -6,12 +6,24 @@ import { Formik } from 'formik';
 import CustomInput from '../components/CustomInput';
 import AppSingleDropdown from '../components/CustomDropdown';
 
+
 const MainScreen=({navigation})=>{
+  const colors = ["#ffff99","#cc9900","#99cc00","#66ff33","#0066cc","#00ffff"]
+  const placeholders = [
+    "Select your daily activity",
+    "Very Low Activity",
+    "Low Activity",
+    "Moderate Activity",
+    "High Activity",
+    "Very High Activity"
+  ]
+  const [placeholder,setPlaceholder] = useState(placeholders[0])
+  const [color,setColor] = useState(colors[0])
   const windowWidth = Dimensions.get('window').width;
     return(
         <View style={styles.container}>
           <Formik
-            initialValues={{ weight: '',heightFt:'',heightIn:'' }}
+            initialValues={{ weight: '',heightFt:'',heightIn:'',Activity:0 }}
             onSubmit={values => console.log(values)}
           >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -48,23 +60,56 @@ const MainScreen=({navigation})=>{
           </View>
           <View >
           <AppSingleDropdown
-          placeholder="Select your daily activity"
+          color={color}
+          placeholder= {placeholder}
           options={[
-            { value: "1", label: (
+            { value: 1, label: (
              <Text
              style={{
-              color:"",
+              color:"#cc9900",
+              fontWeight:"bold",
              }}
              >Very Low Activity</Text> 
             )},
-            { value: "2", label: "Low Activity" },
-            { value: "3", label: "Moderate Activity" },
-            { value: "4", label: "High Activity" },
-            { value: "5", label: "Very High Activity" }
+            { value: 2, label: (
+              <Text
+              style={{
+               color:"#99cc00",
+               fontWeight:"bold",
+              }}
+              >Low Activity</Text> 
+             ) },
+            { value: 3, label:(
+              <Text
+              style={{
+               color:"#66ff33",
+               fontWeight:"bold",
+              }}
+              >Moderate Activity</Text> 
+             ) },
+            { value: 4, label: (
+              <Text
+              style={{
+               color:"#00ffff",
+               fontWeight:"bold",
+              }}
+              >High Activity</Text> 
+             ) },
+            { value: 5, label: (
+              <Text
+              style={{
+               color:"#0066cc",
+               fontWeight:"bold",
+              }}
+              >Very High Activity</Text> 
+             ) }
           ]}
           value={values["Activity"]}
           name="Activity"
-          onChange={handleChange("Activity")}
+          onChange={(val)=>{
+            setColor(colors[val])
+            setPlaceholder(placeholders[val])
+            handleChange("Activity")}}
         />
         </View>
          <CustomButton onPress={handleSubmit} title="Submit" />

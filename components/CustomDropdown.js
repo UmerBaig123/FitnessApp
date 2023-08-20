@@ -20,6 +20,7 @@ const AppSingleDropdown = ({
     value,
     name,
     isTablet,
+    color,
    
     onChange,
     custom,
@@ -92,7 +93,7 @@ const AppSingleDropdown = ({
                 borderRadius:13,
             }}
             textInputStyle={{
-                backgroundColor:"#ffff99",
+                backgroundColor:color,
                 fontSize:20,
                 fontWeight:"bold"
             }}
