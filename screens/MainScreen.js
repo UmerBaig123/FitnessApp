@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import CustomInput from '../components/CustomInput';
 import AppSingleDropdown from '../components/CustomDropdown';
 import GenderSelector from '../components/GenderSelector';
+import calculateBMI from '../functions/CalculateBMI';
 
 
 const MainScreen=({navigation})=>{
