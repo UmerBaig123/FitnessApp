@@ -6,13 +6,6 @@ import { Dropdown } from "sharingan-rn-modal-dropdown";
 import * as Font from "expo-font";
 import Apploading from "expo-app-loading";
 
-const getFonts = () =>
-  Font.loadAsync({
-    Techno: require("../assets/fonts/ShareTechMono-Regular.ttf"),
-    Orbitron: require("../assets/fonts/Orbitron-VariableFont_wght.ttf"),
-    Digital: require("../assets/fonts/digital.ttf")
-  });
-
 const AppSingleDropdown = ({
     title,
     placeholder,
@@ -28,7 +21,6 @@ const AppSingleDropdown = ({
     textStyle={},
     ...otherProps
   }) => {
-    const [fontsloaded, setFontsLoaded] = useState(false);
     const { 
         errors,
         handleChange,
@@ -40,30 +32,19 @@ const AppSingleDropdown = ({
   
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
-    if (fontsloaded) {
     return (
       <View
         style={{
-          marginBottom: 16,
-          width: "100%",
+          width: '100%',
           flexDirection: isTablet ? "row" : "column",
           alignItems: isTablet ? "center" : null,
         }}
       >
-        <Text
-          style={{
-            marginBottom: isTablet ? 0 : 5,
-            minWidth: isTablet ? 200 : null,
-            fontSize:17,
-            color:"#737373",
-          }}
-        >
-          {title}
-        </Text>
+        <Text style={styles.topText}>{title}</Text>
         <View
           style={{
             height:windowHeight*0.09,
-            width:windowWidth*0.999,
+            width:windowWidth*.999,
             
           }}
         >
@@ -85,17 +66,15 @@ const AppSingleDropdown = ({
            ):
           (
           <Dropdown
-          disableSort
+            disableSort
+            
+            dropdownIcon="menu-down"
             textInputPlaceholderColor="#000000"
             textInputPlaceholder={placeholder}
-            itemContainerStyle = {{
-                
-                borderRadius:13,
-            }}
             textInputStyle={{
                 backgroundColor:color,
                 fontSize:20,
-                fontWeight:"bold"
+                alignItems:"center",
             }}
             data={options}
             borderRadius={20}
@@ -113,16 +92,16 @@ const AppSingleDropdown = ({
           )}
         </View>
       </View>
-    )}else{ 
-        return (
-        <Apploading
-          startAsync={getFonts}
-          onFinish={() => {
-            setFontsLoaded(true);
-          }}
-          onError={console.warn}
-        />
-      );}
+    )
   };
+  const styles = StyleSheet.create({
+    topText: {
+      fontFamily: 'Orbitron',
+      paddingTop:10,
+      paddingLeft:10,
+      paddingBottom:5,
+      fontSize:20,
+    }, 
+  })
 
 export default AppSingleDropdown;  

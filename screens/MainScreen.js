@@ -73,6 +73,7 @@ const MainScreen=({navigation})=>{
           }}>
 
           <AppSingleDropdown
+          title={"Activity"}
           color={color}
           placeholder= {placeholder}
           options={[
