@@ -8,6 +8,11 @@ import AppSingleDropdown from '../components/CustomDropdown';
 import GenderSelector from '../components/GenderSelector';
 import calculateBMI from '../functions/CalculateBMI';
 
+function checkField(values) {
+  if(values.Activity==""||values.Gender==""||values.Goal==""||values.heightFt==""||values.heightIn==""||values.weight==""){
+    return false
+  }
+}
 
 const MainScreen=({navigation})=>{
   const colors = ["#ffff99","#cc9900","#99cc00","#66ff33","#00ffff","#0066cc"]
@@ -19,11 +24,21 @@ const MainScreen=({navigation})=>{
     "High Activity ",
     "Very High Activity "
   ]
+  const placeholdersG = [
+    "Select your Goal ",
+    "Lose Weight Fast ",
+    "Lose Weight Slowly ",
+    "Maintain Weight ",
+    "Gain Weight Slowly ",
+    "Gain Weight Fast "
+  ]
   const [placeholder,setPlaceholder] = useState(placeholders[0])
+  const [placeholderG,setPlaceholderG] = useState(placeholdersG[0])
+  const [ColorG,setColorG] = useState(colors[0])
   const [color,setColor] = useState(colors[0])
   const windowWidth = Dimensions.get('window').width;
   const windowheight = Dimensions.get("window").height;
-
+    
     return(
         <View style={styles.container}>
 
@@ -33,9 +48,24 @@ const MainScreen=({navigation})=>{
               heightFt:'',
               heightIn:'',
               Activity:0,
-              Gender:"male"
+              Gender:"",
+              Goal:"",
+              weightUnit:"LBS",
              }}
-            onSubmit={values => console.log(values)}
+            onSubmit={(values) =>{
+               if(values.Activity==""||values.Gender==""||values.Goal==""||values.heightFt==""||values.heightIn==""||values.weight==""){
+                let error = ''
+                for (let key in values) {
+                  if (values[key] === "") {
+                    error = error?error+", "+key:error+key;
+                  }
+                }
+                alert(error+" cannot be empty")
+               }else{
+                console.log(calculateBMI(values))
+                console.log(values)
+               }
+              }}
           >
 
           {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -43,10 +73,14 @@ const MainScreen=({navigation})=>{
 
           <CustomInput
           title="Weight"
+          multipleUnits={true}
           onChangeText={handleChange('weight')}
           onBlur={handleBlur('weight')}
+          setUnit={(val)=>{
+            values.weightUnit = val
+          }}
           value={values.weight}
-          unit="LBS"
+          unit={['LBS','KG']}
           />
 
 
