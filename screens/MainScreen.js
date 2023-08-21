@@ -66,40 +66,45 @@ const MainScreen=({navigation})=>{
             { value: 1, label: (
              <Text
              style={{
+              fontSize:16,
               color:"#cc9900",
-              fontWeight:"bold",
+              fontFamily:"SCode",
              }}
              >Very Low Activity</Text> 
             )},
             { value: 2, label: (
               <Text
               style={{
+                fontSize:16,
                color:"#99cc00",
-               fontWeight:"bold",
+               fontFamily:"SCode",
               }}
               >Low Activity</Text> 
              ) },
             { value: 3, label:(
               <Text
               style={{
+                fontSize:16,
                color:"#66ff33",
-               fontWeight:"bold",
+               fontFamily:"SCode",
               }}
               >Moderate Activity</Text> 
              ) },
             { value: 4, label: (
               <Text
               style={{
+                fontSize:16,
                color:"#00ffff",
-               fontWeight:"bold",
+               fontFamily:"SCode",
               }}
               >High Activity</Text> 
              ) },
             { value: 5, label: (
               <Text
               style={{
+                fontSize:16,
                color:"#0066cc",
-               fontWeight:"bold",
+               fontFamily:"SCode",
               }}
               >Very High Activity</Text> 
              ) }
@@ -111,8 +116,11 @@ const MainScreen=({navigation})=>{
             setPlaceholder(placeholders[val])
             handleChange("Activity")}}
         />
+
         </View>
+
          <CustomButton onPress={handleSubmit} title="Submit" />
+
        </View>
      )}
    </Formik>
