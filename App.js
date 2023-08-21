@@ -39,7 +39,11 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={MainScreen}
+          
           options={{
+            headerStyle:{
+              backgroundColor:"#ffbd03",
+            },
             title: 'Calorie Counter',
              headerTitleStyle:{
               color:"#6495ED",
@@ -47,7 +51,8 @@ export default function App() {
               flex:1,
               flexdirection:"row",
               fontSize:30,
-          },statusBarColor:"#000000",}}
+          },
+          statusBarColor:"#FFFFF",}}
         />
         </Stack.Group>
         </Stack.Navigator>
