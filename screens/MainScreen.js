@@ -9,26 +9,37 @@ import GenderSelector from '../components/GenderSelector';
 
 
 const MainScreen=({navigation})=>{
-  const colors = ["#ffff99","#cc9900","#99cc00","#66ff33","#0066cc","#00ffff"]
+  const colors = ["#ffff99","#cc9900","#99cc00","#66ff33","#00ffff","#0066cc"]
   const placeholders = [
-    "Select your daily activity",
-    "Very Low Activity",
-    "Low Activity",
-    "Moderate Activity",
-    "High Activity",
-    "Very High Activity"
+    "Select your daily activity ",
+    "Very Low Activity ",
+    "Low Activity ",
+    "Moderate Activity ",
+    "High Activity ",
+    "Very High Activity "
   ]
   const [placeholder,setPlaceholder] = useState(placeholders[0])
   const [color,setColor] = useState(colors[0])
   const windowWidth = Dimensions.get('window').width;
+  const windowheight = Dimensions.get("window").height;
+
     return(
         <View style={styles.container}>
+
           <Formik
-            initialValues={{ weight: '',heightFt:'',heightIn:'',Activity:0 }}
+            initialValues={{ 
+              weight: '',
+              heightFt:'',
+              heightIn:'',
+              Activity:0,
+              Gender:"male"
+             }}
             onSubmit={values => console.log(values)}
           >
+
           {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
+
           <CustomInput
           title="Weight"
           onChangeText={handleChange('weight')}
@@ -36,10 +47,15 @@ const MainScreen=({navigation})=>{
           value={values.weight}
           unit="LBS"
           />
+
+
+
           <View style = {{
-            flexDirection:"row",
-            alignContent:"center",
+            paddingBottom: windowheight*0.009,
+            flexDirection: "row",
+            alignContent:  "center",
           }}>
+
           <CustomInput
           title="Height"
           titleAlign={"flex-end"}
@@ -49,6 +65,7 @@ const MainScreen=({navigation})=>{
           width={windowWidth*0.499}
           unit="Ft"
           />
+
           <CustomInput
           title="."
           paddingLeft={windowWidth*0.7}
