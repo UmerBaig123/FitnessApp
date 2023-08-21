@@ -1,10 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CustomButton = ({ title, onPress }) => {
+const CustomButton = ({ title, onPress,icon }) => {
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={styles.buttonText}>{title}
+      {icon?<Icon name={icon} size={20}/>:<></>}
+      </Text>
     </TouchableOpacity>
   );
 };
