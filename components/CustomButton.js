@@ -14,7 +14,7 @@ const CustomButton = ({ title, onPress,icon }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: '#4CBB17',
+    backgroundColor: '#ffbd03',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   buttonText: {
-    color: '#FFF',
-    fontSize: 16,
+    color: '#008000',
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });
