@@ -4,13 +4,6 @@ import { View, TextInput, Text, StyleSheet } from 'react-native';
 import * as Font from "expo-font";
 import Apploading from "expo-app-loading";
 
-const getFonts = () =>
-  Font.loadAsync({
-    Orbitron: require("../assets/fonts/Orbitron-VariableFont_wght.ttf"),
-    Techno: require("../assets/fonts/ShareTechMono-Regular.ttf"),
-    Digital: require("../assets/fonts/digital.ttf")
-  });
-  
 const CustomInput = ({
   paddingLeft,
   title,
@@ -20,8 +13,6 @@ const CustomInput = ({
   unit,
   width,height
 }) => {
-  const [fontsloaded, setFontsLoaded] = useState(false);
-  if (fontsloaded) {
     return (
       <View >
           <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
@@ -36,17 +27,6 @@ const CustomInput = ({
       </View>
       </View>
     );
-  }else {
-    return (
-      <Apploading
-        startAsync={getFonts}
-        onFinish={() => {
-          setFontsLoaded(true);
-        }}
-        onError={console.warn}
-      />
-    );
-  }
   }
   
 
