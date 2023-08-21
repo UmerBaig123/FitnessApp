@@ -146,13 +146,73 @@ const MainScreen=({navigation})=>{
           onChange={(val)=>{
             setColor(colors[val])
             setPlaceholder(placeholders[val])
-            handleChange("Activity")}}
+            values.Activity=val}}
+        />
+          <AppSingleDropdown
+          title={"Goal"}
+          color={ColorG}
+          placeholder= {placeholderG}
+          options={[
+            { value: 1, label: (
+             <Text
+             style={{
+              fontSize:16,
+              color:"#cc9900",
+              fontFamily:"SCode",
+             }}
+             >Lose Weight Fast</Text> 
+            )},
+            { value: 2, label: (
+              <Text
+              style={{
+                fontSize:16,
+               color:"#99cc00",
+               fontFamily:"SCode",
+              }}
+              >Lose Weight Slowly</Text> 
+             ) },
+            { value: 3, label:(
+              <Text
+              style={{
+                fontSize:16,
+               color:"#66ff33",
+               fontFamily:"SCode",
+              }}
+              >Maintain Weight</Text> 
+             ) },
+            { value: 4, label: (
+              <Text
+              style={{
+                fontSize:16,
+               color:"#00ffff",
+               fontFamily:"SCode",
+              }}
+              >Gain Weight Slowly</Text> 
+             ) },
+            { value: 5, label: (
+              <Text
+              style={{
+                fontSize:16,
+               color:"#0066cc",
+               fontFamily:"SCode",
+              }}
+              >Gain Weight Fast</Text> 
+             ) }
+          ]}
+          value={values["Activity"]}
+          name="Activity"
+          onChange={(val)=>{
+            setColorG(colors[val])
+            setPlaceholderG(placeholdersG[val])
+            values.Goal=val}}
         />
 
         </View>
-
-         <CustomButton onPress={handleSubmit} title="Submit" />
-
+        <View style={{
+          paddingTop:windowWidth*0.45,
+        }}>
+            <CustomButton onPress={handleSubmit} title="Submit" icon={"check-all"}/>
+        </View>
        </View>
      )}
    </Formik>
