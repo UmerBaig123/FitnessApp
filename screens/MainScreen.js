@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Formik } from 'formik';
 import CustomInput from '../components/CustomInput';
 import AppSingleDropdown from '../components/CustomDropdown';
+import GenderSelector from '../components/GenderSelector';
 
 
 const MainScreen=({navigation})=>{
@@ -57,8 +58,20 @@ const MainScreen=({navigation})=>{
           width={windowWidth*0.499}
           unit="In"
           />
+
           </View>
-          <View >
+          <View style={{
+            height:windowheight*0.1,
+            flexDirection:"column",
+          }}>
+          <GenderSelector setFieldValue={(val)=>{
+            values.Gender=val
+          }}/>
+          </View>
+          <View style={{
+            paddingTop: windowheight*0.009,
+          }}>
+
           <AppSingleDropdown
           color={color}
           placeholder= {placeholder}
