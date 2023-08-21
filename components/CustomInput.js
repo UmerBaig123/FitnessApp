@@ -1,8 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
-import * as Font from "expo-font";
-import Apploading from "expo-app-loading";
+import { View, TextInput, Text, StyleSheet,TouchableOpacity } from 'react-native';
 
 const CustomInput = ({
   paddingLeft,
@@ -11,22 +9,64 @@ const CustomInput = ({
   onBlur,
   value,
   unit,
-  width,height
+  width,
+  height,
+  multipleUnits, //if multipleUnits is true then unit must be an array otherwise a string
+  setUnit
 }) => {
-    return (
-      <View >
-          <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
-      <View style={[styles.inputContainer,{width:width,height:height}]}>
-        <TextInput 
-        textAlign='center'
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        value={value}
-        style={styles.input} />
-        <Text style={styles.poundSymbol}>{unit}</Text>
-      </View>
-      </View>
-    );
+    if (multipleUnits) {
+      const [unitBool,setUnitBool] = useState('true')
+      const [text,setText] = useState('10')
+      return (
+        <View >
+           <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
+           <View style={[styles.inputContainer,{width:width,height:height}]}>
+               <TextInput 
+                 textAlign='center'
+                 onChangeText={onChangeText}
+                 onBlur={onBlur}
+                 value={value}
+                 defaultValue={10}
+                 style={styles.input} />
+                 <TouchableOpacity onPress={()=>{
+                  if (unitBool) {
+                    setUnit("kG")
+                  }else{
+                    setUnit("LBS")
+                  }
+                  setUnitBool(!unitBool)
+                 }}>
+                  {unitBool?
+                  // setUnit("LBS")
+                  (<Text style={styles.poundSymbol}>
+                    {unit[0]}
+                  </Text>):
+                  // setUnit("KG")
+                  (<Text style={styles.poundSymbol}>
+                    {unit[1]}
+                    </Text>)}
+                  
+                 </TouchableOpacity>
+             </View>
+       </View>
+     );
+    }else{
+      return (
+         <View >
+            <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
+            <View style={[styles.inputContainer,{width:width,height:height}]}>
+                <TextInput 
+                  textAlign='center'
+                  onChangeText={onChangeText}
+                  onBlur={onBlur}
+                  value={value}
+                  style={styles.input} />
+                  <Text style={styles.poundSymbol}>{unit}</Text>
+              </View>
+        </View>
+      );
+    }
+    
   }
   
 
