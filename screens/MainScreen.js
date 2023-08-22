@@ -36,6 +36,7 @@ const MainScreen=({navigation})=>{
   const [placeholderG,setPlaceholderG] = useState(placeholdersG[0])
   const [ColorG,setColorG] = useState(colors[0])
   const [color,setColor] = useState(colors[0])
+  const [wUnit,setWUnit] = useState('Weight (LBS)')
   const windowWidth = Dimensions.get('window').width;
   const windowheight = Dimensions.get("window").height;
   const [error, setError] = useState('')
@@ -73,12 +74,13 @@ const MainScreen=({navigation})=>{
           <View>
 
           <CustomInput
-          title="Weight"
+          title={wUnit}
           multipleUnits={true}
           onChangeText={handleChange('weight')}
           onBlur={handleBlur('weight')}
           setUnit={(val)=>{
             values.weightUnit = val
+            setWUnit("Weight ("+val+")")
           }}
           value={values.weight}
           unit={['LBS','KG']}
