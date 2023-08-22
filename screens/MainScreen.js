@@ -240,7 +240,7 @@ const MainScreen=({navigation})=>{
             setPlaceholderG(placeholdersG[val])
             values.Goal=val}}
         />
-
+        <Text style={styles.errText}>{error}</Text>
         </View>
         <View style={{
           paddingTop:windowWidth*0.45,
@@ -256,6 +256,12 @@ const MainScreen=({navigation})=>{
 }
 
 const styles = StyleSheet.create({
+  errText: {
+    textAlign:"center",
+    color:"#FF0000",
+    fontFamily: 'Glitch',
+    fontSize:12,
+  },  
     input:{
       height:50,
      textAlign: 'center',

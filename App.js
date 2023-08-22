@@ -11,7 +11,8 @@ const getFonts = () =>
     Techno: require("./assets/fonts/ShareTechMono-Regular.ttf"),
     Orbitron: require("./assets/fonts/Orbitron-VariableFont_wght.ttf"),
     Digital: require("./assets/fonts/digital.ttf"),
-    SCode: require('./assets/fonts/SourceCodePro-BoldItalic.ttf')
+    SCode: require('./assets/fonts/SourceCodePro-BoldItalic.ttf'),
+    Glitch: require("./assets/fonts/RubikGlitch-Regular.ttf")
   });
 
 
