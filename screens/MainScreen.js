@@ -243,7 +243,7 @@ const MainScreen=({navigation})=>{
         <Text style={styles.errText}>{error}</Text>
         </View>
         <View style={{
-          paddingTop:windowWidth*0.45,
+          paddingTop:windowWidth*0.428,
         }}>
             <CustomButton onPress={handleSubmit} title="Submit" icon={"check-all"}/>
         </View>
