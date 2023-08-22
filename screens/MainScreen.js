@@ -239,8 +239,8 @@ const MainScreen=({navigation})=>{
               >Gain Weight Fast</Text> 
              ) }
           ]}
-          value={values["Activity"]}
-          name="Activity"
+          value={values["Goal"]}
+          name="Goal"
           onChange={(val)=>{
             setColorG(colors[val])
             setPlaceholderG(placeholdersG[val])
