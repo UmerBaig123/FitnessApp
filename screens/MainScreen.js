@@ -8,12 +8,6 @@ import AppSingleDropdown from '../components/CustomDropdown';
 import GenderSelector from '../components/GenderSelector';
 import calculateBMI from '../functions/CalculateBMI';
 
-function checkField(values) {
-  if(values.Activity==""||values.Gender==""||values.Goal==""||values.heightFt==""||values.heightIn==""||values.weight==""){
-    return false
-  }
-}
-
 const MainScreen=({navigation})=>{
   const colors = ["#ffff99","#cc9900","#99cc00","#66ff33","#00ffff","#0066cc"]
   const placeholders = [
@@ -64,7 +58,7 @@ const MainScreen=({navigation})=>{
                 }
                 setError(error+" cannot be empty")
                }else{
-                console.log(calculateBMI(values))
+                calculateBMI(values)
                 console.log(values)
                }
               }}
