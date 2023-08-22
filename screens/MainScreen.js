@@ -61,7 +61,7 @@ const MainScreen=({navigation})=>{
                     error = error?error+", "+key:error+key;
                   }
                 }
-                alert(error+" cannot be empty")
+                setError(error+" cannot be empty")
                }else{
                 console.log(calculateBMI(values))
                 console.log(values)
