@@ -4,6 +4,7 @@ import { View, TextInput, Text, StyleSheet,TouchableOpacity } from 'react-native
 
 const CustomInput = ({
   paddingLeft,
+  inputmode,
   title,
   onChangeText,
   onBlur,
@@ -22,26 +23,24 @@ const CustomInput = ({
            <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
            <View style={[styles.inputContainer,{width:width,height:height}]}>
                <TextInput 
+               inputMode={inputmode}
                  textAlign='center'
                  onChangeText={onChangeText}
                  onBlur={onBlur}
                  value={value}
-                 defaultValue={10}
                  style={styles.input} />
                  <TouchableOpacity onPress={()=>{
                   if (unitBool) {
-                    setUnit("kG")
+                    setUnit("KG")
                   }else{
                     setUnit("LBS")
                   }
                   setUnitBool(!unitBool)
                  }}>
                   {unitBool?
-                  // setUnit("LBS")
                   (<Text style={styles.poundSymbol}>
                     {unit[0]}
                   </Text>):
-                  // setUnit("KG")
                   (<Text style={styles.poundSymbol}>
                     {unit[1]}
                     </Text>)}
@@ -56,6 +55,7 @@ const CustomInput = ({
             <Text style={[styles.topText,{paddingLeft:paddingLeft}]}>{title}</Text>
             <View style={[styles.inputContainer,{width:width,height:height}]}>
                 <TextInput 
+               inputMode={inputmode}
                   textAlign='center'
                   onChangeText={onChangeText}
                   onBlur={onBlur}

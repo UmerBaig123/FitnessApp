@@ -74,6 +74,7 @@ const MainScreen=({navigation})=>{
           <View>
 
           <CustomInput
+          inputmode={"numeric"}
           title={wUnit}
           multipleUnits={true}
           onChangeText={handleChange('weight')}
@@ -95,6 +96,7 @@ const MainScreen=({navigation})=>{
           }}>
 
           <CustomInput
+          inputmode={"numeric"}
           title="Height"
           titleAlign={"flex-end"}
           onChangeText={handleChange('heightFt')}
@@ -105,6 +107,7 @@ const MainScreen=({navigation})=>{
           />
 
           <CustomInput
+          inputmode={"numeric"}
           title="."
           paddingLeft={windowWidth*0.7}
           onChangeText={handleChange('heightIn')}
