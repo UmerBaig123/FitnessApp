@@ -38,6 +38,7 @@ const MainScreen=({navigation})=>{
   const [color,setColor] = useState(colors[0])
   const windowWidth = Dimensions.get('window').width;
   const windowheight = Dimensions.get("window").height;
+  const [error, setError] = useState('')
     
     return(
         <View style={styles.container}>
