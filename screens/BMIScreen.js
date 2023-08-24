@@ -27,9 +27,14 @@ const BMIScreen = ({ navigation }) => {
   const [isCarbModalVisible, setCarbModalVisible] = useState(false);
   const [isProModalVisible, setProModalVisible] = useState(false);
   const [isFatModalVisible, setFatModalVisible] = useState(false);
+  const [isWarningVisible, setWarningVisible] = useState(false);
+  const [warning, setWarning] = useState("");
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+  const toggleWarning = () => {
+    setWarningVisible(!isWarningVisible);
   };
   const toggleCalModal = () => {
     setCalModalVisible(!isCalModalVisible);
@@ -48,10 +53,20 @@ const BMIScreen = ({ navigation }) => {
       let data = await retrieveData("userData");
       SetData(data);
       if (data.bmi <= 18) {
+        if (data.Goal < 3) {
+          toggleWarning();
+          setWarning("It is not Advisable to lose weight at your current BMI");
+        }
         setMessage("You are Underweight");
         setBMICond(require("../assets/BMILow.png"));
       } else {
         if (data.bmi >= 25) {
+          if (data.Goal > 3) {
+            toggleWarning();
+            setWarning(
+              "It is not Advisable to gain weight at your current BMI"
+            );
+          }
           setMessage("You are overWeight");
           setBMICond(require("../assets/BMIHigh.png"));
         } else {
@@ -184,6 +199,37 @@ const BMIScreen = ({ navigation }) => {
           />
         </View>
       </ImageBackground>
+      <Modal
+        animationType="slide"
+        visible={isWarningVisible}
+        transparent={true}
+        onRequestClose={toggleWarning}
+      >
+        <View
+          style={{
+            backgroundColor: "rgba(200, 0, 0,0.8)",
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={[styles.modalText, { textAlign: "center" }]}>
+            <Text
+              style={{
+                fontSize: 30,
+                color: "#ffb84d",
+                fontFamily: "Glitch",
+              }}
+            >
+              Warning:{"\n"}
+            </Text>
+            {warning}
+          </Text>
+          <TouchableOpacity onPress={toggleWarning} style={styles.closeButton}>
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
       <Modal
         animationType="slide"
         visible={isModalVisible}
