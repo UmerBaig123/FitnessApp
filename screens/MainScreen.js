@@ -71,54 +71,75 @@ const MainScreen=({navigation})=>{
           inputmode={"numeric"}
           title={wUnit}
           multipleUnits={true}
-          onChangeText={handleChange('weight')}
-          onBlur={handleBlur('weight')}
-          setUnit={(val)=>{
-            values.weightUnit = val
-            setWUnit("Weight ("+val+")")
+              onChangeText={handleChange("weight")}
+              onBlur={handleBlur("weight")}
+              setUnit={(val) => {
+                values.weightUnit = val;
+                setWUnit("Weight (" + val + ")");
+              }}
+              unitOnPress={() => {
+                console.log("hi");
           }}
           value={values.weight}
-          unit={['LBS','KG']}
+              unit={["LBS", "KG"]}
           />
 
-
-
-          <View style = {{
-            paddingBottom: windowheight*0.009,
+            {Ft ? (
+              <View
+                style={{
+                  paddingBottom: windowheight * 0.009,
             flexDirection: "row",
-            alignContent:  "center",
-          }}>
-
+                  alignContent: "center",
+                }}
+              >
           <CustomInput
           inputmode={"numeric"}
-          title="Height"
+                  title={hUnit}
           titleAlign={"flex-end"}
-          onChangeText={handleChange('heightFt')}
-          onBlur={handleBlur('heightFt')}
+                  width={windowWidth * 0.499}
+                  onChangeText={handleChange("heightFt")}
+                  onBlur={handleBlur("heightFt")}
           value={values.heightFt}
-          width={windowWidth*0.499}
           unit="Ft"
+                  unitOnPress={() => {
+                    setHUnit("Height (Meters)");
+                    values.heightUnit = false;
+                    setFt(false);
+                  }}
           />
 
           <CustomInput
           inputmode={"numeric"}
           title="."
-          paddingLeft={windowWidth*0.7}
-          onChangeText={handleChange('heightIn')}
-          onBlur={handleBlur('heightIn')}
+                  paddingLeft={windowWidth * 0.7}
+                  onChangeText={handleChange("heightIn")}
+                  onBlur={handleBlur("heightIn")}
           value={values.heightIn}
-          width={windowWidth*0.499}
+                  width={windowWidth * 0.499}
           unit="In"
+                  unitOnPress={() => {
+                    setHUnit("Height (Meters)");
+                    values.heightUnit = false;
+                    setFt(false);
+                  }}
           />
-
           </View>
-          <View style={{
-            height:windowheight*0.1,
-            flexDirection:"column",
-          }}>
-          <GenderSelector setFieldValue={(val)=>{
-            values.Gender=val
-          }}/>
+            ) : (
+              <CustomInput
+                inputmode={"numeric"}
+                title={hUnit}
+                onChangeText={handleChange("heightFt")}
+                onBlur={handleBlur("heightFt")}
+                value={values.heightFt}
+                unit="Meters"
+                unitOnPress={() => {
+                  setHUnit("Height (Ft/In)");
+                  values.heightUnit = true;
+                  setFt(true);
+                }}
+              />
+            )}
+
           </View>
           <View style={{
             paddingTop: windowheight*0.009,
