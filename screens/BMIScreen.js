@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ScrollView,
   View,
   StyleSheet,
   ImageBackground,
@@ -190,20 +191,53 @@ const BMIScreen = ({ navigation }) => {
         onRequestClose={toggleModal}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
-          <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      <Modal
-        animationType="slide"
-        visible={isModalVisible}
-        transparent={true}
-        onRequestClose={toggleModal}
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
+          <ScrollView
+            style={{
+              width: screenWidth * 0.95,
+            }}
+          >
+            <Image source={require("../assets/BMI.png")} />
+            <Text style={styles.modalText}>
+              <Text
+                style={{
+                  fontFamily: "Orbitron",
+                  fontSize: 25,
+                  color: "#b1afb6",
+                }}
+              >
+                &ensp;&ensp;&ensp;&ensp;&ensp;BMI&ensp;
+              </Text>
+              (Body Mass Index) is a numerical value calculated based on weight
+              and height. It estimates body fat.{"\n"}
+              {"\n"}
+              <Text style={{ color: "#ffbb99" }}>
+                BMI = {"\n"}&ensp;&ensp;weight (kg) / (height (m))^2{"\n"}
+              </Text>
+              {"\n"}
+              <Text style={{ fontSize: 30 }}>Interpretations:{"\n"}</Text>
+              {"\n"}
+              <Text style={{ color: "#ff99ff" }}>
+                Underweight:{"\n"}&ensp;&ensp;BMI ≤ 18.5{"\n"}
+                {"\n"}
+              </Text>
+              <Text style={{ color: "#99ff99" }}>
+                Normal weight:{"\n"}&ensp;&ensp;BMI 18.6 - 24.9{"\n"}
+                {"\n"}
+              </Text>
+              <Text style={{ color: "#ffbf80" }}>
+                Overweight:{"\n"}&ensp;&ensp;BMI 25 - 29.9{"\n"}
+                {"\n"}
+              </Text>
+              <Text style={{ color: "#ff8080" }}>
+                Obese:{"\n"}&ensp;&ensp;BMI ≥ 30{"\n"}
+                {"\n"}
+              </Text>
+              {"\n"}
+              Note: BMI doesn't consider muscle, bone density. It's a general
+              indicator. Consult a healthcare professional for accurate health
+              assessment.
+            </Text>
+          </ScrollView>
           <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -216,7 +250,52 @@ const BMIScreen = ({ navigation }) => {
         onRequestClose={toggleCalModal}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
+          <ScrollView
+            style={{
+              width: screenWidth * 0.95,
+            }}
+          >
+            <Image
+              style={{
+                marginTop: screenWidth * 0.1,
+                marginBottom: screenWidth * 0.05,
+                marginHorizontal: screenWidth * 0.2,
+                height: screenHeight * 0.3,
+                width: screenHeight * 0.27,
+              }}
+              source={require("../assets/Calories.png")}
+            />
+            <Text style={styles.modalText}>
+              <Text
+                style={{
+                  fontFamily: "Orbitron",
+                  fontSize: 25,
+                  color: "#b1aFFF",
+                }}
+              >
+                &ensp;&ensp;Calories
+              </Text>{" "}
+              are units of energy in food. They fuel our body's activities.
+              {"\n"}
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Our body uses calories for functions like
+              breathing, moving, and cell repair.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Consuming more calories than needed can lead to
+              weight gain.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Consuming fewer calories can lead to weight loss.
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Balancing calorie intake with activity is
+              important for weight management.{"\n"}
+              {"\n"}
+              {"\n"}
+              Remember, the quality of calories (nutrients) also matters for
+              overall health.
+            </Text>
+          </ScrollView>
           <TouchableOpacity onPress={toggleCalModal} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -229,7 +308,49 @@ const BMIScreen = ({ navigation }) => {
         onRequestClose={toggleCarbModal}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
+          <ScrollView
+            style={{
+              width: screenWidth * 0.95,
+            }}
+          >
+            <Image
+              style={{
+                margin: screenWidth * 0.04,
+              }}
+              source={require("../assets/Carbs.png")}
+            />
+            <Text style={styles.modalText}>
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontFamily: "Orbitron",
+                  color: "#b1aFFF",
+                }}
+              >
+                &ensp;&ensp;Carbohydrates
+              </Text>
+              , or carbs, are a type of nutrient found in foods like bread, rice
+              and potatoes.{"\n"}
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;They are our body's main energy source.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Carbs include sugars, fiber, and starches.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Simple carbs (sugars) are in foods like fruits and
+              sweets.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Complex carbs (fiber, starches) are in grains,
+              veggies.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;The body breaks carbs into glucose for energy.
+              {"\n"}
+              {"\n"}
+              {"\n"}
+              Choosing healthier carbs and managing intake is vital for balanced
+              eating.
+            </Text>
+          </ScrollView>
           <TouchableOpacity
             onPress={toggleCarbModal}
             style={styles.closeButton}
@@ -245,7 +366,47 @@ const BMIScreen = ({ navigation }) => {
         onRequestClose={toggleProModal}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
+          <ScrollView
+            style={{
+              width: screenWidth * 0.95,
+            }}
+          >
+            <Image
+              style={{
+                margin: screenWidth * 0.02,
+              }}
+              source={require("../assets/Protein.png")}
+            />
+            <Text style={styles.modalText}>
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontFamily: "Orbitron",
+                  color: "#b1aFFF",
+                }}
+              >
+                &ensp;&ensp;Protiens
+              </Text>{" "}
+              are essential nutrients crucial for many functions. They are found
+              in foods like meats, dairy, soy and tofu{"\n"}
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;They're made up of amino acids, building blocks of
+              life.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Proteins repair tissues, enzymes and more.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Proteins are essential for building muscle and for
+              its recovery.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Body uses dietary protein to replenish its own
+              proteins.
+              {"\n"}
+              {"\n"}
+              {"\n"}
+              Balancing protein intake supports body's growth and maintenance.
+            </Text>
+          </ScrollView>
           <TouchableOpacity onPress={toggleProModal} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -258,7 +419,49 @@ const BMIScreen = ({ navigation }) => {
         onRequestClose={toggleFatModal}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>This is a description popup!</Text>
+          <ScrollView
+            style={{
+              width: screenWidth * 0.95,
+            }}
+          >
+            <Image
+              style={{
+                marginTop: screenHeight * 0.031,
+                marginHorizontal: screenWidth * 0.03,
+              }}
+              source={require("../assets/Fat.png")}
+            />
+            <Text style={styles.modalText}>
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontFamily: "Orbitron",
+                  color: "#b1aFFF",
+                }}
+              >
+                &ensp;&ensp;Fats
+              </Text>{" "}
+              are a type of nutrient important for health. They are found in
+              foods like butter, fatty fish, egg yolks and more{"\n"}
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;They provide energy and support cell growth.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;There are different types: saturated, unsaturated,
+              trans.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Healthy fats from foods like avocados, nuts, fish.
+              {"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Saturated and trans fats should be limited.{"\n"}
+              {"\n"}
+              {"\u2B24"}&ensp;Fats help absorb certain vitamins in the body.
+              {"\n"}
+              {"\n"}
+              {"\n"}
+              Choosing good fats and moderating intake is key for well-being.
+            </Text>
+          </ScrollView>
           <TouchableOpacity onPress={toggleFatModal} style={styles.closeButton}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
@@ -270,22 +473,25 @@ const BMIScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: "rgba(0, 102, 255,0.5)",
+    backgroundColor: "rgba(0, 102, 255,0.8)",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   modalText: {
-    fontSize: 30,
+    fontSize: 20,
+    fontFamily: "Techno",
     color: "#FFFFFF",
     marginBottom: 20,
   },
   closeButton: {
+    margin: screenWidth * 0.03,
     backgroundColor: "#ffbd03",
     padding: 10,
     borderRadius: 5,
   },
   closeButtonText: {
+    paddingHorizontal: screenWidth * 0.1,
     color: "green",
     fontSize: 16,
   },
