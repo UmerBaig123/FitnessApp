@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import * as Font from "expo-font";
 import Apploading from "expo-app-loading";
+import { retrieveData } from "./functions/asyncStore";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -24,12 +25,25 @@ import BMIScreen from "./screens/BMIScreen";
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [fontsloaded, setFontsLoaded] = useState(false);
+  const [isCache, SetIsCache] = useState();
+  useEffect(() => {
+    const checkCache = async () => {
+      let cache = await retrieveData("userData");
+      if (cache != null) {
+        SetIsCache("FoodScreen");
+      } else {
+        SetIsCache("Home");
+      }
+    };
+    checkCache();
+  }, []);
   if (fontsloaded) {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Group
-    screenOptions={{ 
+    return (
+      <NavigationContainer>
+        {/* Add isCache once done working */}
+        <Stack.Navigator initialRouteName={"Home"}>
+          <Stack.Group
+            screenOptions={{
               headerStyle: {
                 backgroundColor: "#ffbd03",
               },
@@ -46,21 +60,21 @@ export default function App() {
               headerLeft: () => (
                 <Image
                   style={{
-        width: 30,
-        height: 30,
+                    width: 30,
+                    height: 30,
                     marginRight: 10,
-      }}
+                  }}
                   source={require("./assets/logo.png")}
                 />
               ),
-     }}
-  >
+            }}
+          >
             <Stack.Screen name="Home" component={MainScreen} />
             <Stack.Screen name="FoodScreen" component={FoodScreen} />
             <Stack.Screen name="BMIScreen" component={BMIScreen} />
-        </Stack.Group>
+          </Stack.Group>
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     );
   } else {
     return (
