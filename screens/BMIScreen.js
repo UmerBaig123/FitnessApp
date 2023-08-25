@@ -168,7 +168,7 @@ const BMIScreen = ({ navigation }) => {
                   fontFamily: "HotPizza",
                 }}
               >
-                {data.protien} g
+                {data.protein} g
               </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={toggleFatModal}>
