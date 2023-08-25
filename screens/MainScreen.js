@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#ccffff",
+    backgroundColor: "#a4c0f4",
   },
 });
 export default MainScreen;
