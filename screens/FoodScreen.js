@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { retrieveData } from "../functions/asyncStore";
+import ProgressBar from "../components/ProgressBar";
+
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
@@ -18,7 +20,7 @@ const FoodScreen = () => {
     checkCache();
   }, []);
 
-  const progressCal = 2000 / data.calorieIn;
+  const progressCal = CalorieTaken / data.calorieIn;
   const progressCarbs = CarbsTaken / data.carbs;
   const progressProteins = ProteinsTaken / data.protein;
   const progressFats = FatsTaken / data.fat;
@@ -42,6 +44,12 @@ const FoodScreen = () => {
                 {CalorieTaken}/{data.calorieIn}
               </Text>
             </Text>
+            <ProgressBar
+              color={"#ffbd03"}
+              unfilledColor={"#ffebb3"}
+              progress={progressCal}
+              width={300}
+            />
           </View>
           <View
             style={{
@@ -57,6 +65,12 @@ const FoodScreen = () => {
                   {CarbsTaken}/{data.carbs}
                 </Text>
               </Text>
+              <ProgressBar
+                color={"#ffbd03"}
+                unfilledColor={"#ffebb3"}
+                progress={progressCarbs}
+                width={90}
+              />
             </View>
             <View style={{ flexDirection: "column", alignItems: "center" }}>
               <Text style={[styles.text, { fontSize: 20 }]}>
@@ -65,6 +79,12 @@ const FoodScreen = () => {
                   {ProteinsTaken}/{data.protein}
                 </Text>
               </Text>
+              <ProgressBar
+                color={"#ffbd03"}
+                unfilledColor={"#ffebb3"}
+                progress={progressProteins}
+                width={90}
+              />
             </View>
             <View style={{ flexDirection: "column", alignItems: "center" }}>
               <Text style={[styles.text, { fontSize: 20 }]}>
@@ -73,6 +93,12 @@ const FoodScreen = () => {
                   {FatsTaken}/{data.fat}
                 </Text>
               </Text>
+              <ProgressBar
+                color={"#ffbd03"}
+                unfilledColor={"#ffebb3"}
+                progress={progressFats}
+                width={90}
+              />
             </View>
           </View>
         </View>
