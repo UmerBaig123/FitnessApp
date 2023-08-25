@@ -22,14 +22,14 @@ const calculateBMI = (data) => {
     weightKg * genderDif * 24 * 0.925 * activityLevel[data.Activity];
   let calorieIn = (calorie + caloricDif[data.Goal]).toFixed(0);
   let carbs = (calorieIn * 0.128).toFixed(0);
-  let protien = (calorieIn * 0.045).toFixed(0);
+  let protein = (calorieIn * 0.045).toFixed(0);
   let fat = (calorieIn * 0.0305).toFixed(0);
   let userData = {
     ...data,
     bmi: bmi,
     calorieIn: calorieIn,
     carbs: carbs,
-    protien: protien,
+    protein: protein,
     fat: fat,
   };
   storeData("userData", userData);
