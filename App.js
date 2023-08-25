@@ -41,7 +41,7 @@ export default function App() {
     return (
       <NavigationContainer>
         {/* Add isCache once done working */}
-        <Stack.Navigator initialRouteName={"BMIScreen"}>
+        <Stack.Navigator initialRouteName={"FoodScreen"}>
           <Stack.Group
             screenOptions={{
               headerStyle: {
