@@ -6,8 +6,13 @@ import ProgressBar from "../components/ProgressBar";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
-const FoodScreen = () => {
-  const [data, setData] = useState({});
+const FoodScreen = ({ navigation }) => {
+  const [data, setData] = useState({
+    calorieIn: 3000,
+    protein: 200,
+    carbs: 200,
+    fat: 200,
+  });
   const [CalorieTaken, setCalorieTaken] = useState(0);
   const [CarbsTaken, setCarbsTaken] = useState(0);
   const [ProteinsTaken, setProteinsTaken] = useState(0);
