@@ -88,7 +88,7 @@ const CustomInput = ({
             textAlign="center"
             onChangeText={onChangeText}
             onBlur={onBlur}
-            value={value}
+            defaultValue={value}
             style={[
               styles.input,
               {
@@ -101,8 +101,9 @@ const CustomInput = ({
               style={{
                 flexDirection: "row",
                 padding: 10,
-                borderWidth: 1,
-                backgroundColor: "#ffcc00",
+                borderWidth: isUnitBox ? 1 : 0,
+                borderLeftWidth: isUnitBox ? 0 : 1,
+                backgroundColor: isUnitBox ? "#ffcc00" : "transparent",
                 height: 47,
                 alignItems: "center",
                 borderLeftColor: "#000",
