@@ -27,13 +27,16 @@ const FoodScreen = ({ navigation }) => {
     fat: 200,
   });
   const [foodResult, setFoodResult] = useState([]);
+  const [selectedFood, setSelectedFood] = useState([{}]);
   const [CalorieTaken, setCalorieTaken] = useState(0);
   const [isFatModalVisible, setFatModalVisible] = useState(false);
+  const [isFoodModalVisible, setFoodModalVisible] = useState(false);
   const [CarbsTaken, setCarbsTaken] = useState(0);
   const [ProteinsTaken, setProteinsTaken] = useState(0);
   const [FatsTaken, setFatsTaken] = useState(0);
   const [searchVal, setSearchVal] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [nutrientMultiplier, setNutrientMultiplier] = useState(100);
   const getFoodsFromApi = async () => {
     setFoodResult([]);
     setIsLoading(true);
@@ -67,6 +70,10 @@ const FoodScreen = ({ navigation }) => {
   };
   const toggleFatModal = () => {
     setFatModalVisible(!isFatModalVisible);
+    setFoodResult([]);
+  };
+  const toggleFoodModal = () => {
+    setFoodModalVisible(!isFoodModalVisible);
   };
   useEffect(() => {
     const checkCache = async () => {
@@ -201,7 +208,12 @@ const FoodScreen = ({ navigation }) => {
               width: screenWidth * 0.95,
             }}
           >
-            <FoodList foods={foodResult} />
+            <FoodList
+              foods={foodResult}
+              setFood={setSelectedFood}
+              setThisMod={toggleFatModal}
+              setFoodMod={toggleFoodModal}
+            />
             <View>
               <ActivityIndicator
                 animating={isLoading}
@@ -212,18 +224,113 @@ const FoodScreen = ({ navigation }) => {
           </ScrollView>
         </View>
       </Modal>
+      <Modal
+        animationType="slide"
+        visible={isFoodModalVisible}
+        transparent={true}
+        onRequestClose={toggleFoodModal}
+      >
+        <View
+          style={[
+            styles.modalContainer,
+            { justifyContent: "flex-start", alignItems: "flex-start" },
+          ]}
+        >
+          <TouchableOpacity
+            onPress={toggleFoodModal}
+            style={styles.closeButton}
+          >
+            <View
+              style={{
+                paddingHorizontal: screenWidth * 0.03,
+                paddingVertical: screenHeight * 0.015,
+              }}
+            >
+              <Icon name="close" size={30} color={"#000000"} />
+            </View>
+          </TouchableOpacity>
+          <View
+            style={{
+              backgroundColor: "#a4c0f4",
+              borderWidth: 1,
+              width: screenWidth * 0.9,
+              height: screenHeight * 0.9,
+              marginLeft: screenWidth * 0.02,
+              borderRadius: 11,
+            }}
+          >
+            <Text style={styles.FoodModText}>{selectedFood.Name}</Text>
+            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
+              Calories:{" "}
+              {nutrientMultiplier != 0
+                ? ((selectedFood.Calories / 100) * nutrientMultiplier).toFixed(
+                    1
+                  )
+                : selectedFood.Calories}{" "}
+              KCal
+            </Text>
+            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
+              Carbs:{" "}
+              {nutrientMultiplier != 0
+                ? ((selectedFood.Carbs / 100) * nutrientMultiplier).toFixed(1)
+                : selectedFood.Carbs}{" "}
+              G
+            </Text>
+            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
+              Proteins:{" "}
+              {nutrientMultiplier != 0
+                ? ((selectedFood.Proteins / 100) * nutrientMultiplier).toFixed(
+                    1
+                  )
+                : selectedFood.Proteins}{" "}
+              G
+            </Text>
+            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
+              Fats:{" "}
+              {nutrientMultiplier != 0
+                ? ((selectedFood.Fats / 100) * nutrientMultiplier).toFixed(1)
+                : selectedFood.Fats}{" "}
+              G
+            </Text>
+            <View
+              style={{
+                alignItems: "center",
+              }}
+            >
+              <CustomInput
+                placeHolder={"100"}
+                titleAlign={"flex-end"}
+                inputmode={"numeric"}
+                width={screenWidth * 0.8}
+                onChangeText={(val) => {
+                  setNutrientMultiplier(val);
+                }}
+                onBlur={() => {}}
+                unit="G"
+                unitOnPress={() => {}}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  FoodModText: {
+    paddingLeft: screenWidth * 0.07,
+    paddingTop: screenWidth * 0.04,
+    fontSize: 40,
+    fontFamily: "HotPizza",
+  },
   modalContainer: {
     borderWidth: 2,
     borderColor: "#8c8c8c",
     borderRadius: 30,
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#4981e9",
     width: screenWidth * 0.95,
     height: screenHeight * 0.8,
     flex: 1,

@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const FoodList = ({ foods }) => {
+const FoodList = ({ foods, setFood, setThisMod, setFoodMod }) => {
   const [visibleBlocks, setVisibleBlocks] = useState(foods.map(() => true));
   return (
     <View style={styles.container}>
       {foods.map((food, index) => (
         <TouchableOpacity
+          key={index}
           onPress={() => {
-            console.log([
-              food.Name,
-              food.Calories,
-              food.Carbs,
-              food.Proteins,
-              food.Fats,
-            ]);
+            setFood({
+              Name: food.Name,
+              Calories: food.Calories,
+              Carbs: food.Carbs,
+              Proteins: food.Proteins,
+              Fats: food.Fats,
+            });
+            setFoodMod();
           }}
         >
-          <View key={index} style={styles.foodBlock}>
+          <View style={styles.foodBlock}>
             <Text style={styles.foodName}>{food.Name}</Text>
             <Text style={{ fontSize: 16 }}>Calories: {food.Calories} Kcal</Text>
             <View
