@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { storeData, retrieveData } from "./asyncStore";
+import { storeData } from "./asyncStore";
 
 const calculateBMI = (data) => {
   // Convert height from cm to m
