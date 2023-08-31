@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 
-const FoodList = ({ foods, setFood, setThisMod, setFoodMod }) => {
-  const [visibleBlocks, setVisibleBlocks] = useState(foods.map(() => true));
+const screenWidth = Dimensions.get("screen").width;
+const FoodListMain = ({ foods, onPress }) => {
   return (
     <View style={styles.container}>
       {foods.map((food, index) => (
         <TouchableOpacity
           key={index}
           onPress={() => {
-            setFood({
-              Name: food.Name,
-              Calories: food.Calories,
-              Carbs: food.Carbs,
-              Proteins: food.Proteins,
-              Fats: food.Fats,
-            });
-            setFoodMod();
+            onPress(index);
           }}
         >
           <View style={styles.foodBlock}>
@@ -41,6 +40,7 @@ const FoodList = ({ foods, setFood, setThisMod, setFoodMod }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: screenWidth,
     flex: 1,
     padding: 10,
   },
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodList;
+export default FoodListMain;
