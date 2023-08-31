@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getFoods } from "../functions/getFoods";
-import FoodList from "../functions/renderItems";
+import FoodList from "../components/renderItems";
+import CustomButton from "../components/CustomButton";
 import {
   ActivityIndicator,
   ScrollView,
@@ -11,10 +12,11 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { retrieveData } from "../functions/asyncStore";
+import { retrieveData, storeData } from "../functions/asyncStore";
 import CustomInput from "../components/CustomInput";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProgressBar from "../components/ProgressBar";
+import FoodListMain from "../components/renderItemMain";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -37,6 +39,38 @@ const FoodScreen = ({ navigation }) => {
   const [searchVal, setSearchVal] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [nutrientMultiplier, setNutrientMultiplier] = useState(100);
+  const [foodsEaten, setFoodsEaten] = useState([{}]);
+  const storeFood = async (food) => {
+    const prevData = await retrieveData("foods");
+    if (prevData != null) {
+      storeData("foods", [...prevData, food]);
+      setFoodsEaten([...prevData, food]);
+    } else {
+      storeData("foods", [food]);
+      setFoodsEaten([food]);
+    }
+  };
+  const setFood = async () => {
+    const foods = await retrieveData("foods");
+    setFoodsEaten(foods);
+    let totalCalories = 0;
+    let totalCarbs = 0;
+    let totalProteins = 0;
+    let totalFats = 0;
+    foods.forEach((element) => {
+      totalCalories += element.Calories;
+      totalCarbs += element.Carbs;
+      totalProteins += element.Proteins;
+      totalFats += element.Fats;
+    });
+    setCalorieTaken(parseInt(totalCalories));
+    setCarbsTaken(parseInt(totalCarbs));
+    setProteinsTaken(parseInt(totalProteins));
+    setFatsTaken(parseInt(totalFats));
+  };
+  useEffect(() => {
+    setFood();
+  }, []);
   const getFoodsFromApi = async () => {
     setFoodResult([]);
     setIsLoading(true);
@@ -166,6 +200,17 @@ const FoodScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
+      <ScrollView>
+        <FoodListMain
+          foods={foodsEaten}
+          onPress={(index) => {
+            let foodsAte = foodsEaten;
+            foodsAte.splice(index, 1);
+            storeData("foods", foodsAte);
+            setFood();
+          }}
+        />
+      </ScrollView>
       <View style={styles.floating}>
         <TouchableOpacity style={styles.button} onPress={toggleFatModal}>
           <Text style={styles.buttonText}>+</Text>
@@ -231,10 +276,13 @@ const FoodScreen = ({ navigation }) => {
         onRequestClose={toggleFoodModal}
       >
         <View
-          style={[
-            styles.modalContainer,
-            { justifyContent: "flex-start", alignItems: "flex-start" },
-          ]}
+          style={{
+            height: screenHeight,
+            width: screenWidth,
+            paddingLeft: screenWidth * 0.03,
+            justifyContent: "center",
+            alignContent: "center",
+          }}
         >
           <TouchableOpacity
             onPress={toggleFoodModal}
@@ -246,7 +294,7 @@ const FoodScreen = ({ navigation }) => {
                 paddingVertical: screenHeight * 0.015,
               }}
             >
-              <Icon name="close" size={30} color={"#000000"} />
+              <Icon name="close" size={30} color={"#e60000"} />
             </View>
           </TouchableOpacity>
           <View
@@ -254,43 +302,52 @@ const FoodScreen = ({ navigation }) => {
               backgroundColor: "#a4c0f4",
               borderWidth: 1,
               width: screenWidth * 0.9,
-              height: screenHeight * 0.9,
               marginLeft: screenWidth * 0.02,
               borderRadius: 11,
             }}
           >
             <Text style={styles.FoodModText}>{selectedFood.Name}</Text>
-            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
-              Calories:{" "}
-              {nutrientMultiplier != 0
-                ? ((selectedFood.Calories / 100) * nutrientMultiplier).toFixed(
-                    1
-                  )
-                : selectedFood.Calories}{" "}
-              KCal
+            <Text style={[styles.FoodModText, { fontSize: 15 }]}>
+              Calories:&emsp;&emsp;&emsp;{" "}
+              <Text style={{ fontSize: 20 }}>
+                {nutrientMultiplier != 0
+                  ? (
+                      (selectedFood.Calories / 100) *
+                      nutrientMultiplier
+                    ).toFixed(1)
+                  : selectedFood.Calories}{" "}
+                KCal
+              </Text>
             </Text>
-            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
-              Carbs:{" "}
-              {nutrientMultiplier != 0
-                ? ((selectedFood.Carbs / 100) * nutrientMultiplier).toFixed(1)
-                : selectedFood.Carbs}{" "}
-              G
+            <Text style={[styles.FoodModText, { fontSize: 15 }]}>
+              Carbs:&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+              <Text style={{ fontSize: 20 }}>
+                {nutrientMultiplier != 0
+                  ? ((selectedFood.Carbs / 100) * nutrientMultiplier).toFixed(1)
+                  : selectedFood.Carbs}{" "}
+                G
+              </Text>
             </Text>
-            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
-              Proteins:{" "}
-              {nutrientMultiplier != 0
-                ? ((selectedFood.Proteins / 100) * nutrientMultiplier).toFixed(
-                    1
-                  )
-                : selectedFood.Proteins}{" "}
-              G
+            <Text style={[styles.FoodModText, { fontSize: 15 }]}>
+              Proteins:&emsp;&emsp;&nbsp;&nbsp;&nbsp;{" "}
+              <Text style={{ fontSize: 20 }}>
+                {nutrientMultiplier != 0
+                  ? (
+                      (selectedFood.Proteins / 100) *
+                      nutrientMultiplier
+                    ).toFixed(1)
+                  : selectedFood.Proteins}{" "}
+                G
+              </Text>
             </Text>
-            <Text style={[styles.FoodModText, { fontSize: 20 }]}>
-              Fats:{" "}
-              {nutrientMultiplier != 0
-                ? ((selectedFood.Fats / 100) * nutrientMultiplier).toFixed(1)
-                : selectedFood.Fats}{" "}
-              G
+            <Text style={[styles.FoodModText, { fontSize: 15 }]}>
+              Fats:&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;{" "}
+              <Text style={{ fontSize: 20 }}>
+                {nutrientMultiplier != 0
+                  ? ((selectedFood.Fats / 100) * nutrientMultiplier).toFixed(1)
+                  : selectedFood.Fats}{" "}
+                G
+              </Text>
             </Text>
             <View
               style={{
@@ -309,6 +366,56 @@ const FoodScreen = ({ navigation }) => {
                 unit="G"
                 unitOnPress={() => {}}
               />
+              <View style={{ paddingTop: screenHeight * 0.1 }}>
+                <CustomButton
+                  title={"Add"}
+                  icon={"plus"}
+                  onPress={async () => {
+                    const food = {
+                      Name: selectedFood.Name,
+                      Calories:
+                        nutrientMultiplier != 0
+                          ? (
+                              (selectedFood.Calories / 100) *
+                              nutrientMultiplier
+                            ).toFixed(1)
+                          : selectedFood.Calories,
+                      Carbs:
+                        nutrientMultiplier != 0
+                          ? (
+                              (selectedFood.Carbs / 100) *
+                              nutrientMultiplier
+                            ).toFixed(1)
+                          : selectedFood.Carbs,
+                      Proteins:
+                        nutrientMultiplier != 0
+                          ? (
+                              (selectedFood.Proteins / 100) *
+                              nutrientMultiplier
+                            ).toFixed(1)
+                          : selectedFood.Proteins,
+                      Fats:
+                        nutrientMultiplier != 0
+                          ? (
+                              (selectedFood.Fats / 100) *
+                              nutrientMultiplier
+                            ).toFixed(1)
+                          : selectedFood.Fats,
+                    };
+                    storeFood(food);
+                    setCalorieTaken(
+                      parseInt(CalorieTaken) + parseInt(food.Calories)
+                    );
+                    setCarbsTaken(parseInt(CarbsTaken) + parseInt(food.Carbs));
+                    setProteinsTaken(
+                      parseInt(ProteinsTaken) + parseInt(food.Proteins)
+                    );
+                    setFatsTaken(parseInt(FatsTaken) + parseInt(food.Fats));
+                    toggleFatModal();
+                    toggleFoodModal();
+                  }}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -330,7 +437,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#4981e9",
+    backgroundColor: "#FFFFFF",
     width: screenWidth * 0.95,
     height: screenHeight * 0.8,
     flex: 1,
