@@ -20,16 +20,22 @@ const FoodListMain = ({ foods, onPress }) => {
         >
           <View style={styles.foodBlock}>
             <Text style={styles.foodName}>{food.Name}</Text>
-            <Text style={{ fontSize: 16 }}>Calories: {food.Calories} Kcal</Text>
+            <Text style={{ fontSize: 16, fontFamily: "Techno" }}>
+              Calories: {food.Calories} Kcal
+            </Text>
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
               }}
             >
-              <Text>Carbs: {food.Carbs} G</Text>
-              <Text>Proteins: {food.Proteins} G</Text>
-              <Text>Fats: {food.Fats} G</Text>
+              <Text style={{ fontFamily: "Techno" }}>
+                Carbs: {food.Carbs} G
+              </Text>
+              <Text style={{ fontFamily: "Techno" }}>
+                Proteins: {food.Proteins} G
+              </Text>
+              <Text style={{ fontFamily: "Techno" }}>Fats: {food.Fats} G</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -47,11 +53,11 @@ const styles = StyleSheet.create({
   foodBlock: {
     marginBottom: 10,
     padding: 10,
-    backgroundColor: "#f0f0f0",
-    borderRadius: 5,
+    backgroundColor: "#b3ffff",
+    borderRadius: 20,
   },
   foodName: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
 });
