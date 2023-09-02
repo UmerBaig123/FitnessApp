@@ -58,10 +58,10 @@ const FoodScreen = ({ navigation }) => {
     let totalProteins = 0;
     let totalFats = 0;
     foods.forEach((element) => {
-      totalCalories += element.Calories;
-      totalCarbs += element.Carbs;
-      totalProteins += element.Proteins;
-      totalFats += element.Fats;
+      totalCalories += parseInt(element.Calories);
+      totalCarbs += parseInt(element.Carbs);
+      totalProteins += parseInt(element.Proteins);
+      totalFats += parseInt(element.Fats);
     });
     setCalorieTaken(parseInt(totalCalories));
     setCarbsTaken(parseInt(totalCarbs));
