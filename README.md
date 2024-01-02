@@ -10,7 +10,7 @@ Install dependencies with npm
     npm install 
     npm i --force
 ```
-Install dependencies with yard
+Install dependencies with yarn
 
 ```bash
     yarn install
